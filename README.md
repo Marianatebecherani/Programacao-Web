@@ -33,8 +33,20 @@ npm install
 3. Crie o arquivo `.env` com o conteúdo:
 
 ```
-DATABASE_URL="postgresql://usuario:senha@localhost:5432/jets"
+DATABASE_URL="postgresql://usuario:senha@localhost:5432/jets?schema=public"
 JWT_SECRET="jetssecret"
+
+ADMIN_USERNAME="usuarioadmin"
+ADMIN_NOME="nomeadmin"
+ADMIN_EMAIL="email@admin"
+ADMIN_PASSWORD="senhaadmin"
+
+SEND_EMAILS="true"
+EMAIL_FROM="email@admin"
+EMAIL_PASSWORD="passwordadmin"
+EMAIL_HOST="smtp.gmail.com"
+EMAIL_PORT="587"
+EMAIL_SECURE="false"
 ```
 
 4. Configure o banco de dados:
