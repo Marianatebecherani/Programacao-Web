@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  username     String   @id
+  password     String
+  email        String   @unique
+  nome         String
+  tipo         TipoUsuario
+  status       Status   // 'A', 'I', 'B'
+  quantAcesso  Int      @default(0)
+  tentativas   Int      @default(0)
+
+  atleta       Atleta?
+  funcionario  Funcionario?
+  torcedor     Torcedor?
+}
+
+model Atleta {
+  id         Int     @id @default(autoincrement())
+  usuarioId  String  @unique
+  numero     Int
+  posicao    String
+  imagemUrl  String?
+
+  usuario    Usuario @relation(fields: [usuarioId], references: [username])
+}
+
+model Funcionario {
+  id         Int     @id @default(autoincrement())
+  usuarioId  String  @unique
+  cargo      String
+  imagemUrl  String?
+
+  usuario    Usuario @relation(fields: [usuarioId], references: [username])
+}
+
+model Torcedor {
+  id         Int     @id @default(autoincrement())
+  usuarioId  String  @unique
+  plano      String
+  imagemUrl  String?
+
+  usuario    Usuario @relation(fields: [usuarioId], references: [username])
+}
+
+model Produto {
+  id        Int     @id @default(autoincrement())
+  nome      String
+  descricao String
+  preco     Float
+  estoque   Int
+  imagemUrl String
+}
+
+model Evento {
+  id        Int     @id @default(autoincrement())
+  titulo    String
+  tipo      String  // JOGO | TREINO | REUNIAO
+  data      DateTime
+  hora      DateTime
+  local     String
+  descricao String
+}
+
+model TransacaoFinanceira {
+  id        Int     @id @default(autoincrement())
+  tipo      TipoTransacaoFinanceira
+  valor     Float
+  descricao String
+  categoria String
+  data      DateTime
+}
+
+// Enum for status field in Usuario
+enum Status {
+  A
+  I
+  B
+}
+
+// Enum for tipo in Usuario
+enum TipoUsuario {
+  ADMIN
+  ATLETA
+  FUNCIONARIO
+  TORCEDOR
+}
+
+// Enum for tipo in TransacaoFinanceira
+enum TipoTransacaoFinanceira {
+  RECEITA
+  DESPESA
+}

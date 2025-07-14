@@ -1,0 +1,64 @@
+# -----------------------
+# Geral
+# -----------------------
+
+.DS_Store
+*.log
+*.pem
+*.tsbuildinfo
+*.env
+*.env.*
+!.env.example
+
+# -----------------------
+# Node.js e Yarn/Pnpm
+# -----------------------
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.pnp*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# -----------------------
+# Frontend (Next.js / jets-frontend)
+# -----------------------
+
+jets-frontend/.next/
+jets-frontend/out/
+jets-frontend/node_modules/
+jets-frontend/.env
+jets-frontend/.env.*
+!jets-frontend/.env.example
+
+# -----------------------
+# Backend (Node/Express/Prisma / jets-backend)
+# -----------------------
+
+jets-backend/node_modules/
+jets-backend/dist/
+jets-backend/.env
+jets-backend/.env.*
+!jets-backend/.env.example
+jets-backend/prisma/generated/
+jets-backend/prisma/migrations/
+
+# -----------------------
+# Vercel
+# -----------------------
+
+.vercel
+
+# -----------------------
+# IDEs e SO
+# -----------------------
+
+.vscode/
+.idea/
+Thumbs.db
